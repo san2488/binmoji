@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Binmoji</title>
+    <style>
+        #emoji-representation {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #binary-number {
+            text-align: center;
+            caret-color: transparent;
+        }
+
+        .digit-emoji {}
+
+        .digit-each {
+            display: block;
+            margin-bottom: 0px;
+            line-height: 17px;
+        }
+    </style>
+</head>
+
+<body>
+    <div style="text-align: center;">
+        <input type="number" id="binary-number" placeholder="Enter a number">
+    </div>
+    <div>&nbsp;</div>
+    <div style="text-align: center;">
+        <div id="emoji-representation"></div>
+    </div>
+</body>
+<script lang="JavaScript">
+    // read the number from binary-number input field and convert it to binary
+    function convertToBinary() {
+        let binaryNumber = document.getElementById("binary-number").value;
+        let emojiRepresentation = document.getElementById("emoji-representation");
+
+        // check if the input is a number
+        if (isNaN(binaryNumber)) {
+            emojiRepresentation.innerHTML = "Please enter a valid number";
+            return;
+        }
+
+        let numberEmoji = "";
+        // convert the number to binary
+        let binaryDigits = binaryNumber.split("");
+        binaryDigits.forEach(digit => {
+            // convert the binary number to emoji
+            let digitEmoji = convertBinaryToEmoji(digit);
+            numberEmoji += "<div class='.digit-emoji'>" + digitEmoji + "</div>";
+        });
+
+        // display the emoji representation
+        emojiRepresentation.innerHTML = numberEmoji;
+    }
+
+    function convertBinaryToEmoji(digit) {
+        digit = parseInt(digit).toString(2);
+        // add leading zeros till the length is 4
+        while (digit.length < 4) {
+            digit = "0" + digit;
+        }
+        let emoji = "";
+        for (let i = 0; i < digit.length; i++) {
+            if (digit[i] === "0") {
+                emoji += "<span class='digit-each'>⬜️</span>";
+            } else {
+                emoji += "<span class='digit-each'>🟩</span>";
+            }
+        }
+        return emoji;
+    }
+    const inputField = document.getElementById("binary-number");
+    inputField.addEventListener("input", convertToBinary);
+    convertToBinary();
+</script>
+
+</html>
