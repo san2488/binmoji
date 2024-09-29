@@ -22,19 +22,61 @@
             margin-bottom: 0px;
             line-height: 17px;
         }
+
+        #copy-button {
+            background-color: #4CAF50;
+            /* Green background */
+            color: white;
+            /* White text */
+            border: none;
+            /* No border */
+            border-radius: 5px;
+            /* Rounded corners */
+            padding: 5px 10px;
+            /* Padding */
+            font-size: 12px;
+            /* Font size */
+            cursor: pointer;
+            /* Pointer cursor on hover */
+            transition: background-color 0.3s ease, transform 0.2s;
+            /* Smooth transitions */
+        }
+
+        #copy-button:hover {
+            background-color: #45a049;
+            /* Darker green on hover */
+            transform: scale(1.05);
+            /* Slightly enlarge */
+        }
+
+        #copy-button:active {
+            transform: scale(0.95);
+            /* Slightly shrink on click */
+        }
     </style>
 </head>
 
 <body>
     <div style="text-align: center;">
-        <input type="number" id="binary-number" placeholder="Enter a number">
+        <input type="number" id="binary-number" placeholder="0000">
     </div>
     <div>&nbsp;</div>
     <div style="text-align: center;">
         <div id="emoji-representation"></div>
+        <div>&nbsp;</div>
+        <button id="copy-button" onclick="copyEmojiRepresentation()">Copy</button>
     </div>
 </body>
 <script lang="JavaScript">
+    function copyEmojiRepresentation() {
+        let emojiRepresentation = document.getElementById("emoji-representation");
+        let range = document.createRange();
+        range.selectNode(emojiRepresentation);
+        window.getSelection().removeAllRanges();
+        window.getSelection().addRange(range);
+        document.execCommand("copy");
+        window.getSelection().removeAllRanges();
+    }
     // read the number from binary-number input field and convert it to binary
     function convertToBinary() {
         let binaryNumber = document.getElementById("binary-number").value;
