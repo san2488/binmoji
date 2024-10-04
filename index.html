@@ -4,6 +4,11 @@
 <head>
     <title>Binmoji</title>
     <style>
+        html body {
+            height: 100vh;
+            width: 100%;
+        }
+
         #emoji-representation {
             display: flex;
             justify-content: center;
@@ -53,18 +58,37 @@
             transform: scale(0.95);
             /* Slightly shrink on click */
         }
+
+        .box {
+            display: flex;
+            flex-flow: column nowrap;
+            justify-content: center;
+            align-items: center;
+            align-content: center;
+            height: 80%;
+        }
+
+        .box div.flex-item {
+            flex: 0 1 auto;
+            align-self: auto;
+            min-width: 0;
+            min-height: auto;
+            margin: 10px 0 10px 0;
+        }
     </style>
 </head>
 
 <body>
-    <div style="text-align: center;">
-        <input type="number" id="binary-number" placeholder="0000">
-    </div>
-    <div>&nbsp;</div>
-    <div style="text-align: center;">
-        <div id="emoji-representation"></div>
-        <div>&nbsp;</div>
-        <button id="copy-button" onclick="copyEmojiRepresentation()">Copy</button>
+    <div class="box">
+        <div style="text-align: center;" class="flex-item">
+            <input type="number" id="binary-number" placeholder="0000">
+        </div>
+        <!-- <div class="flex-item">&nbsp;</div> -->
+        <div id="emoji-representation" class="flex-item"></div>
+        <!-- <div class="flex-item">&nbsp;</div> -->
+        <!-- <div class="flex-item">
+            <button id="copy-button" onclick="copyEmojiRepresentation()">Copy</button>
+        </div> -->
     </div>
 </body>
 <script lang="JavaScript">
